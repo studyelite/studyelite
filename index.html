@@ -707,4 +707,19 @@
         const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
             item.querySelector('.faq-question').addEventListener('click', () => {
-                faqItems.forEach(other => { if (other !==
+                faqItems.forEach(other => { if (other !== item) other.classList.remove('active'); });
+                item.classList.toggle('active');
+            });
+        });
+
+        function downloadAPK() {
+            const link = document.createElement('a');
+            link.href = CONFIG.ANDROID_APK_URL;
+            link.download = 'StudyELITE.apk';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
