@@ -133,11 +133,31 @@
         /* Platform Card */
         .dl-platform-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); padding: 20px; border-radius: var(--radius-md); transition: var(--transition); }
         .dl-platform-card:hover { border-color: rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); }
-        
+
         .dl-plat-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
-        .dl-plat-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 8px; background: rgba(255,255,255,0.05); font-size: 1.2rem; }
+        .dl-plat-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 10px; background: rgba(255,255,255,0.05); }
+        .dl-plat-icon svg { width: 28px; height: 28px; }
         .dl-plat-title h4 { font-size: 1.1rem; font-weight: 600; }
         .dl-plat-title p { font-size: 0.8rem; color: var(--success); font-weight: 500; }
+
+        /* Trust Badges */
+        .trust-section { margin-top: 50px; padding-top: 50px; border-top: 1px solid var(--border-glass); }
+        .trust-badges { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; align-items: center; }
+        .trust-badge { display: flex; align-items: center; gap: 10px; padding: 15px 20px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); border-radius: var(--radius-md); }
+        .trust-badge svg { width: 24px; height: 24px; flex-shrink: 0; }
+        .trust-badge-text { display: flex; flex-direction: column; }
+        .trust-badge-label { font-size: 0.75rem; color: var(--text-secondary); }
+        .trust-badge-value { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); }
+
+        /* Testimonial Section */
+        .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+        .testimonial-card { background: var(--bg-card); border: 1px solid var(--border-glass); padding: 20px; border-radius: var(--radius-md); }
+        .testimonial-header { display: flex; gap: 12px; margin-bottom: 12px; align-items: center; }
+        .testimonial-avatar { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #0056b3); }
+        .testimonial-author h5 { font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
+        .testimonial-author p { font-size: 0.8rem; color: var(--text-secondary); }
+        .testimonial-text { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; }
+        .testimonial-stars { color: #fbbf24; margin-bottom: 10px; font-size: 0.9rem; }
 
         /* Steps for APK */
         .dl-steps { margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; gap: 10px; }
@@ -189,6 +209,7 @@
         @media (max-width: 992px) {
             .grid-3, .grid-6, .price-grid, .dl-grid { grid-template-columns: 1fr 1fr; }
             .hero h1 { font-size: 2.8rem; }
+            .testimonials { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 768px) {
@@ -197,15 +218,17 @@
             .hero h1 { font-size: 2.2rem; letter-spacing: -1px; }
             .hero p { font-size: 1.1rem; }
             .hero-ctas { flex-direction: column; width: 100%; max-width: 300px; margin-left: auto; margin-right: auto; }
-            
+
             .nav-links { display: none; /* Simple mobile hide */ }
             .mobile-menu-btn { display: block; }
-            
+
             .grid-3, .grid-6, .price-grid, .dl-grid, .metric-grid { grid-template-columns: 1fr; }
             .metric-grid { gap: 30px; }
-            
+            .testimonials { grid-template-columns: 1fr; }
+
             .download-wrapper { padding: 30px; }
             .price-card { padding: 30px; }
+            .trust-badges { flex-direction: column; gap: 15px; }
         }
     </style>
 </head>
@@ -358,16 +381,23 @@
                     </div>
                     
                     <div class="dl-platforms">
+                        <!-- ANDROID -->
                         <div class="dl-platform-card">
                             <div class="dl-plat-header">
-                                <div class="dl-plat-icon">🤖</div>
+                                <div class="dl-plat-icon">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#3DDC84" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="7 10 12 15 17 10"></polyline>
+                                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                                    </svg>
+                                </div>
                                 <div class="dl-plat-title">
                                     <h4>Android (Direct APK)</h4>
                                     <p>Verified Secure Build</p>
                                 </div>
                             </div>
                             <p style="font-size:0.85rem; color:var(--text-secondary);">Package: <code style="color:white; background:#222; padding:2px 4px; border-radius:4px;" id="apk-package-file">com.studyelite.app</code></p>
-                            
+
                             <div class="dl-steps">
                                 <p style="font-weight:600; font-size:0.85rem; color:white;">Installation Steps:</p>
                                 <div class="dl-step-item"><div class="dl-step-count">1</div>Download the .apk file below.</div>
@@ -380,17 +410,41 @@
                             </div>
                         </div>
 
+                        <!-- WINDOWS -->
                         <div class="dl-platform-card">
                             <div class="dl-plat-header">
-                                <div class="dl-plat-icon">💻 / 🍎</div>
+                                <div class="dl-plat-icon">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M3 3h8v8H3V3m10 0h8v8h-8V3M3 13h8v8H3v-8m10 0h8v8h-8v-8z" fill="#0078D4"/>
+                                    </svg>
+                                </div>
                                 <div class="dl-plat-title">
-                                    <h4>Windows & iPhone (iOS)</h4>
+                                    <h4>Windows</h4>
                                     <p>Web App / PWA Technology</p>
                                 </div>
                             </div>
-                            <p style="font-size:0.85rem; color:var(--text-secondary);">Access the fully functional app directly through your browser. You can "Add to Home Screen" (iOS) or "Install" via Chrome/Edge (Windows) for a native experience.</p>
+                            <p style="font-size:0.85rem; color:var(--text-secondary);">Access the fully functional app directly through your browser. Install via Chrome/Edge for a native experience.</p>
                             <div class="dl-btn-group">
-                                <a href="javascript:void(0)" onclick="window.location.href=CONFIG.WINDOWS_IPHONE_URL" class="btn btn-secondary btn-sm">Open on Windows/iPhone</a>
+                                <a href="javascript:void(0)" onclick="window.location.href=CONFIG.WINDOWS_IPHONE_URL" class="btn btn-secondary btn-sm">Open on Windows</a>
+                            </div>
+                        </div>
+
+                        <!-- iOS/iPhone -->
+                        <div class="dl-platform-card">
+                            <div class="dl-plat-header">
+                                <div class="dl-plat-icon">
+                                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z" fill="#555"/>
+                                    </svg>
+                                </div>
+                                <div class="dl-plat-title">
+                                    <h4>iPhone (iOS)</h4>
+                                    <p>Web App / PWA Technology</p>
+                                </div>
+                            </div>
+                            <p style="font-size:0.85rem; color:var(--text-secondary);">Open in Safari and use "Add to Home Screen" for an app-like experience on iPhone and iPad.</p>
+                            <div class="dl-btn-group">
+                                <a href="javascript:void(0)" onclick="window.location.href=CONFIG.WINDOWS_IPHONE_URL" class="btn btn-secondary btn-sm">Open on iPhone</a>
                             </div>
                         </div>
                     </div>
@@ -413,6 +467,87 @@
                 <div class="metric-item">
                     <div class="metric-num">4.8/5</div>
                     <div class="metric-label">User Satisfaction (Beta)</div>
+                </div>
+            </div>
+
+            <div class="trust-section">
+                <h3 style="text-align:center; font-size:1.5rem; margin-bottom:30px; color:var(--text-secondary);">Trusted by Students Worldwide</h3>
+                <div class="trust-badges">
+                    <div class="trust-badge">
+                        <svg viewBox="0 0 24 24" fill="#28a745">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                        <div class="trust-badge-text">
+                            <span class="trust-badge-label">Security</span>
+                            <span class="trust-badge-value">SSL Encrypted</span>
+                        </div>
+                    </div>
+                    <div class="trust-badge">
+                        <svg viewBox="0 0 24 24" fill="#007bff">
+                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/>
+                        </svg>
+                        <div class="trust-badge-text">
+                            <span class="trust-badge-label">Privacy</span>
+                            <span class="trust-badge-value">GDPR Compliant</span>
+                        </div>
+                    </div>
+                    <div class="trust-badge">
+                        <svg viewBox="0 0 24 24" fill="#fbbf24">
+                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                        </svg>
+                        <div class="trust-badge-text">
+                            <span class="trust-badge-label">Rating</span>
+                            <span class="trust-badge-value">4.8/5 Stars</span>
+                        </div>
+                    </div>
+                    <div class="trust-badge">
+                        <svg viewBox="0 0 24 24" fill="#007bff">
+                            <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zM7 11h5v5H7z"/>
+                        </svg>
+                        <div class="trust-badge-text">
+                            <span class="trust-badge-label">Established</span>
+                            <span class="trust-badge-value">Since 2023</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 60px;">
+                <h3 style="text-align:center; font-size:1.5rem; margin-bottom:30px; color:var(--text-secondary);">What Students Are Saying</h3>
+                <div class="testimonials">
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-text">"Study ELITE transformed how I prepare for exams. The visual progress tracking keeps me motivated every single day."</p>
+                        <div class="testimonial-header" style="margin-top:15px;">
+                            <div class="testimonial-avatar"></div>
+                            <div class="testimonial-author">
+                                <h5>Maria G.</h5>
+                                <p>Engineering Student</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-text">"Finally, an app that understands student life. The streak system is addictive in the best way possible."</p>
+                        <div class="testimonial-header" style="margin-top:15px;">
+                            <div class="testimonial-avatar"></div>
+                            <div class="testimonial-author">
+                                <h5>James R.</h5>
+                                <p>Medical Student</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-stars">★★★★★</div>
+                        <p class="testimonial-text">"I went from overwhelmed to organized in one week. My grades improved and stress went down. Highly recommend!"</p>
+                        <div class="testimonial-header" style="margin-top:15px;">
+                            <div class="testimonial-avatar"></div>
+                            <div class="testimonial-author">
+                                <h5>Sarah K.</h5>
+                                <p>High School Senior</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -502,8 +637,30 @@
                 <a href="#">Terms of Service</a>
                 <a href="mailto:contact@studyelite.app">Contact</a>
             </div>
-            <p class="copyright">&copy; 2023 Study ELITE. All rights reserved.</p>
-            <p class="copyright" style="margin-top:5px; font-size:0.7rem;">Package ID: com.studyelite.app</p>
+            <p class="copyright">&copy; 2026 Study ELITE. All rights reserved.</p>
+            <p class="copyright" style="margin-top:5px; font-size:0.7rem;">Android Package ID: com.studyelite.app | Established 2023</p>
+            <div style="margin-top:20px; display:flex; gap:15px; justify-content:center; align-items:center; flex-wrap:wrap;">
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="#3DDC84" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    <span style="color: rgba(255,255,255,0.4); font-size:0.75rem;">Android</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 3h8v8H3V3m10 0h8v8h-8V3M3 13h8v8H3v-8m10 0h8v8h-8v-8z" fill="#0078D4"/>
+                    </svg>
+                    <span style="color: rgba(255,255,255,0.4); font-size:0.75rem;">Windows</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18.71 19.5C17.88 20.74 17 21.95 15.66 21.97C14.32 22 13.89 21.18 12.37 21.18C10.84 21.18 10.37 21.95 9.09997 22C7.78997 22.05 6.79997 20.68 5.95997 19.47C4.24997 17 2.93997 12.45 4.69997 9.39C5.56997 7.87 7.12997 6.91 8.81997 6.88C10.1 6.86 11.32 7.75 12.11 7.75C12.89 7.75 14.37 6.68 15.92 6.84C16.57 6.87 18.39 7.1 19.56 8.82C19.47 8.88 17.39 10.1 17.41 12.63C17.44 15.65 20.06 16.66 20.09 16.67C20.06 16.74 19.67 18.11 18.71 19.5ZM13 3.5C13.73 2.67 14.94 2.04 15.94 2C16.07 3.17 15.6 4.35 14.9 5.19C14.21 6.04 13.07 6.7 11.95 6.61C11.8 5.46 12.36 4.26 13 3.5Z" fill="#555"/>
+                    </svg>
+                    <span style="color: rgba(255,255,255,0.4); font-size:0.75rem;">iOS</span>
+                </div>
+            </div>
         </div>
     </footer>
 
