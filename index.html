@@ -235,11 +235,11 @@
 <body>
 
     <script>
-        // Placeholders for your URLs
+        // Configuration URLs
         const CONFIG = {
-            ANDROID_APK_URL: "#TODO_LINK_TO_YOUR_APK_FILE.apk", // Eg: https://github.com/user/repo/releases/download/v1.0/app.apk
-            WINDOWS_IPHONE_URL: "https://nexocodai-studyelite.hf.space/",
-            WEB_APP_URL: "https://nexocodai-studyelite.hf.space/", // Usually the same as above if it's a PWA
+            ANDROID_APK_URL: "https://raw.githubusercontent.com/studyelite/studyelite/main/releases/app-release.apk",
+            WINDOWS_IPHONE_URL: "https://studyelite.github.io/studyelite/",
+            WEB_APP_URL: "https://studyelite.github.io/studyelite/",
             ANDROID_PACKAGE_NAME: "com.studyelite.app"
         };
     </script>
@@ -635,7 +635,7 @@
             <div class="footer-links">
                 <a href="#">Privacy Policy</a>
                 <a href="#">Terms of Service</a>
-                <a href="mailto:contact@studyelite.app">Contact</a>
+                <a href="/cdn-cgi/l/email-protection#c8aba7a6bca9abbc88bbbcbdacb1ada4a1bcade6a9b8b8">Contact</a>
             </div>
             <p class="copyright">&copy; 2026 Study ELITE. All rights reserved.</p>
             <p class="copyright" style="margin-top:5px; font-size:0.7rem;">Android Package ID: com.studyelite.app | Established 2023</p>
@@ -664,7 +664,7 @@
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Set dynamic package name in UI
         document.getElementById('apk-package-file').innerText = CONFIG.ANDROID_PACKAGE_NAME;
 
@@ -685,9 +685,4 @@
         });
 
         // Simple Mobile Menu (Placeholder behavior)
-        document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
-            alert('Navigation menu would open here on mobile.');
-        });
-    </script>
-</body>
-</html>
+        document.querySelector('.mobile
