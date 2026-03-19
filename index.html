@@ -18,21 +18,16 @@
     <style>
         /* --- CSS VARIABLES & RESET --- */
         :root {
-            /* Colors */
             --bg-dark: #0a0a0a;
             --bg-card: rgba(255, 255, 255, 0.03);
             --bg-glass: rgba(15, 15, 15, 0.7);
             --border-glass: rgba(255, 255, 255, 0.08);
             --text-primary: #ffffff;
             --text-secondary: #b0b0b0;
-            --accent: #007bff; /* Electric Blue */
+            --accent: #007bff;
             --accent-glow: rgba(0, 123, 255, 0.3);
             --success: #28a745;
-
-            /* Typography */
             --font-main: 'Inter', sans-serif;
-
-            /* Spacing & Effects */
             --container-width: 1100px;
             --radius-lg: 16px;
             --radius-md: 12px;
@@ -56,13 +51,10 @@
 
         /* --- BUTTONS --- */
         .btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; border-radius: var(--radius-md); font-weight: 600; font-size: 1rem; transition: var(--transition); }
-        
         .btn-primary { background-color: var(--accent); color: white; border: 1px solid transparent; }
         .btn-primary:hover { background-color: #0069d9; transform: translateY(-2px); box-shadow: 0 4px 15px var(--accent-glow); }
-
         .btn-secondary { background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-glass); }
         .btn-secondary:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.15); }
-
         .btn-web { color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; }
         .btn-web:hover { color: var(--text-primary); }
 
@@ -74,17 +66,65 @@
         .nav-links a { font-size: 0.9rem; color: var(--text-secondary); font-weight: 500; }
         .nav-links a:hover { color: var(--text-primary); }
         
-        .mobile-menu-btn { display: none; color: white; font-size: 1.5rem; }
+        /* ===== FIX 1: MOBILE MENU ===== */
+        .mobile-menu-btn {
+            display: none;
+            color: white;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1100;
+        }
+
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            border-bottom: 1px solid var(--border-glass);
+            z-index: 999;
+            padding: 20px 0;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        .mobile-nav.open {
+            display: flex;
+        }
+
+        .mobile-nav a {
+            width: 100%;
+            text-align: center;
+            padding: 16px 20px;
+            font-size: 1rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+            border-bottom: 1px solid var(--border-glass);
+        }
+
+        .mobile-nav a:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-nav a:hover {
+            color: var(--text-primary);
+            background: rgba(255,255,255,0.03);
+        }
 
         /* --- HERO --- */
         .hero { padding: 160px 0 100px 0; text-align: center; position: relative; }
         .hero::before { content: ''; position: absolute; width: 300px; height: 300px; background: var(--accent); filter: blur(150px); opacity: 0.2; top: 10%; left: 50%; transform: translateX(-50%); z-index: -1; }
-        
         .hero h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.1; letter-spacing: -2px; margin-bottom: 1.5rem; }
         .hero p { font-size: 1.25rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 3rem auto; }
         .hero-ctas { display: flex; gap: 15px; justify-content: center; align-items: center; margin-bottom: 1rem; }
         
-        /* App Mockup Placeholder */
         .mockup-container { margin-top: 60px; position: relative; display: flex; justify-content: center; }
         .mockup-phone { width: 280px; height: 580px; background: #171717; border: 12px solid #262626; border-radius: 36px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); overflow: hidden; position: relative; }
         .mockup-notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; height: 25px; background: #262626; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; z-index: 10; }
@@ -119,28 +159,21 @@
         .step-num { font-size: 3rem; font-weight: 800; color: rgba(255,255,255,0.05); position: absolute; top: -20px; left: 50%; transform: translateX(-50%); z-index: -1; }
         .step h3 { font-size: 1.25rem; margin-top: 20px; margin-bottom: 10px; }
 
-        /* --- DOWNLOAD SECTION (Crucial for Trust) --- */
+        /* --- DOWNLOAD SECTION --- */
         .download { padding: 100px 0; position: relative; }
         .download-wrapper { background: var(--bg-card); border: 1px solid var(--border-glass); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 60px; border-radius: 24px; position: relative; overflow: hidden; }
         .download-wrapper::before { content: ''; position: absolute; width: 200px; height: 200px; background: var(--accent); filter: blur(100px); opacity: 0.15; bottom: -50px; right: -50px; }
-        
         .dl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
         .dl-info h2 { font-size: 2.25rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: -1px; }
         .dl-info p { color: var(--text-secondary); margin-bottom: 2rem; }
-        
         .dl-platforms { display: flex; flex-direction: column; gap: 20px; }
-        
-        /* Platform Card */
         .dl-platform-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); padding: 20px; border-radius: var(--radius-md); transition: var(--transition); }
         .dl-platform-card:hover { border-color: rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); }
-
         .dl-plat-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
         .dl-plat-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 10px; background: rgba(255,255,255,0.05); }
         .dl-plat-icon svg { width: 28px; height: 28px; }
         .dl-plat-title h4 { font-size: 1.1rem; font-weight: 600; }
         .dl-plat-title p { font-size: 0.8rem; color: var(--success); font-weight: 500; }
-
-        /* Trust Badges */
         .trust-section { margin-top: 50px; padding-top: 50px; border-top: 1px solid var(--border-glass); }
         .trust-badges { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; align-items: center; }
         .trust-badge { display: flex; align-items: center; gap: 10px; padding: 15px 20px; background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); border-radius: var(--radius-md); }
@@ -148,8 +181,6 @@
         .trust-badge-text { display: flex; flex-direction: column; }
         .trust-badge-label { font-size: 0.75rem; color: var(--text-secondary); }
         .trust-badge-value { font-size: 0.9rem; font-weight: 600; color: var(--text-primary); }
-
-        /* Testimonial Section */
         .testimonials { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
         .testimonial-card { background: var(--bg-card); border: 1px solid var(--border-glass); padding: 20px; border-radius: var(--radius-md); }
         .testimonial-header { display: flex; gap: 12px; margin-bottom: 12px; align-items: center; }
@@ -158,12 +189,9 @@
         .testimonial-author p { font-size: 0.8rem; color: var(--text-secondary); }
         .testimonial-text { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; }
         .testimonial-stars { color: #fbbf24; margin-bottom: 10px; font-size: 0.9rem; }
-
-        /* Steps for APK */
         .dl-steps { margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; gap: 10px; }
         .dl-step-item { display: flex; align-items: start; gap: 10px; font-size: 0.85rem; color: var(--text-secondary); }
         .dl-step-count { width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.1); color: var(--text-primary); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; margin-top: 2px; flex-shrink: 0; }
-        
         .dl-btn-group { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
 
         /* --- TRUST METRICS --- */
@@ -175,15 +203,12 @@
         /* --- PRICING --- */
         .pricing { padding: 100px 0; }
         .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 800px; margin: 0 auto; align-items: start; }
-        
         .price-card { background: var(--bg-card); border: 1px solid var(--border-glass); padding: 40px; border-radius: var(--radius-lg); position: relative; }
         .price-card.featured { border-color: var(--accent); box-shadow: 0 0 20px rgba(0,123,255,0.15); }
-        
         .price-header h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 5px; }
         .price-header p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px; }
         .price-value { font-size: 3rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 30px; }
         .price-value span { font-size: 1rem; color: var(--text-secondary); font-weight: 400; letter-spacing: 0; }
-        
         .price-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; font-size: 0.95rem; }
         .price-list li { display: flex; align-items: center; gap: 10px; color: var(--text-secondary); }
         .price-list li::before { content: '✓'; color: var(--accent); font-weight: 700; }
@@ -201,7 +226,7 @@
         /* --- FOOTER --- */
         footer { padding: 60px 0; border-top: 1px solid var(--border-glass); background: #080808; text-align: center; }
         .footer-logo { font-size: 1.1rem; font-weight: 800; margin-bottom: 20px; display: inline-block; }
-        .footer-links { display: flex; gap: 20px; justify-content: center; margin-bottom: 20px; font-size: 0.85rem; color: var(--text-secondary); }
+        .footer-links { display: flex; gap: 20px; justify-content: center; margin-bottom: 20px; font-size: 0.85rem; color: var(--text-secondary); flex-wrap: wrap; }
         .footer-links a:hover { color: var(--text-primary); }
         .copyright { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
 
@@ -219,13 +244,15 @@
             .hero p { font-size: 1.1rem; }
             .hero-ctas { flex-direction: column; width: 100%; max-width: 300px; margin-left: auto; margin-right: auto; }
 
-            .nav-links { display: none; /* Simple mobile hide */ }
+            /* Show mobile menu button, hide desktop nav */
+            .nav-links { display: none !important; }
             .mobile-menu-btn { display: block; }
+            /* Also hide the install button on mobile header to save space */
+            .nav-install-btn { display: none; }
 
             .grid-3, .grid-6, .price-grid, .dl-grid, .metric-grid { grid-template-columns: 1fr; }
             .metric-grid { gap: 30px; }
             .testimonials { grid-template-columns: 1fr; }
-
             .download-wrapper { padding: 30px; }
             .price-card { padding: 30px; }
             .trust-badges { flex-direction: column; gap: 15px; }
@@ -237,12 +264,22 @@
     <script>
         // Configuration URLs
         const CONFIG = {
-    // Esta URL es la correcta para descargas directas en GitHub
-    ANDROID_APK_URL: "https://github.com/studyelite/studyelite/raw/main/releases/app-release.apk",
-    WINDOWS_IPHONE_URL: "https://nexocodai-studyelite.hf.space/",
-    WEB_APP_URL: "https://nexocodai-studyelite.hf.space/",
-    ANDROID_PACKAGE_NAME: "com.studyelite.app"
-};
+            // FIX 2: Use the correct GitHub raw APK URL that triggers download
+            ANDROID_APK_URL: "https://github.com/studyelite/studyelite/releases/download/v1.0/app-release.apk",
+            WINDOWS_IPHONE_URL: "https://nexocodai-studyelite.hf.space/",
+            WEB_APP_URL: "https://nexocodai-studyelite.hf.space/",
+            ANDROID_PACKAGE_NAME: "com.studyelite.app"
+        };
+
+        // ===== FIX 2: APK Download function =====
+        function downloadAPK() {
+            const link = document.createElement('a');
+            link.href = CONFIG.ANDROID_APK_URL;
+            link.setAttribute('download', 'StudyELITE.apk');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
     </script>
 
     <header>
@@ -256,11 +293,21 @@
                     <li><a href="#how">How it works</a></li>
                     <li><a href="#faq">FAQ</a></li>
                 </ul>
-                <a href="#download" onclick="if(navigator.userAgent.toLowerCase().includes('android')) window.location.href=CONFIG.ANDROID_APK_URL" class="btn btn-secondary btn-sm" style="padding: 8px 16px; font-size: 0.85rem;">Install App</a>
-                <button class="mobile-menu-btn">☰</button>
+                <a href="#download" class="btn btn-secondary nav-install-btn" style="padding: 8px 16px; font-size: 0.85rem;">Install App</a>
+                <!-- FIX 1: Mobile menu button with proper onclick -->
+                <button class="mobile-menu-btn" onclick="toggleMobileMenu()" aria-label="Open menu">☰</button>
             </nav>
         </div>
     </header>
+
+    <!-- FIX 1: Mobile nav dropdown -->
+    <div class="mobile-nav" id="mobileNav">
+        <a href="#features" onclick="closeMobileMenu()">Features</a>
+        <a href="#how" onclick="closeMobileMenu()">How it works</a>
+        <a href="#pricing" onclick="closeMobileMenu()">Pricing</a>
+        <a href="#faq" onclick="closeMobileMenu()">FAQ</a>
+        <a href="#download" onclick="closeMobileMenu()" style="color: var(--accent); font-weight: 600;">Install App ↓</a>
+    </div>
 
     <section class="hero">
         <div class="container">
@@ -305,12 +352,11 @@
         <div class="container">
             <h2 class="section-title">Stop Stressing. Start <span class="accent-text">Achieving</span>.</h2>
             <p class="section-subtitle">Ditch the overwhelming to-do lists and visual chaos. Rely on a trusted system designed for academic success.</p>
-            
             <div class="grid-3">
                 <div class="prob-card">
                     <div class="prob-icon">📅</div>
                     <h3>Total Clarity</h3>
-                    <p>Wake up knowing exactly *what* to study and *when*. No more wasted time deciding where to start.</p>
+                    <p>Wake up knowing exactly what to study and when. No more wasted time deciding where to start.</p>
                 </div>
                 <div class="prob-card">
                     <div class="prob-icon">📊</div>
@@ -330,7 +376,6 @@
         <div class="container">
             <h2 class="section-title">Your Academic Command Center</h2>
             <p class="section-subtitle">Everything you need to organize, optimize, and excel in your studies, right in your pocket.</p>
-            
             <div class="grid-6">
                 <div class="feat-card"><h4>Dashboard</h4><p>Immediate view of today's priorities and upcoming tasks.</p></div>
                 <div class="feat-card"><h4>Subject Organizer</h4><p>Manage all your subjects, materials, and grades in one place.</p></div>
@@ -345,7 +390,6 @@
     <section id="how" class="how">
         <div class="container">
             <h2 class="section-title">Three Steps to Elite Organization</h2>
-            
             <div class="grid-3" style="margin-top: 60px;">
                 <div class="step">
                     <div class="step-num">1</div>
@@ -406,8 +450,9 @@
                                 <div class="dl-step-item"><div class="dl-step-count">3</div>Complete installation & launch Study ELITE.</div>
                             </div>
 
+                            <!-- FIX 2: APK download uses the downloadAPK() function -->
                             <div class="dl-btn-group">
-                                <a href="javascript:void(0)" onclick="window.location.href=CONFIG.ANDROID_APK_URL" class="btn btn-primary btn-sm">Download APK ⬇️</a>
+                                <button onclick="downloadAPK()" class="btn btn-primary btn-sm">Download APK ⬇️</button>
                             </div>
                         </div>
 
@@ -475,36 +520,28 @@
                 <h3 style="text-align:center; font-size:1.5rem; margin-bottom:30px; color:var(--text-secondary);">Trusted by Students Worldwide</h3>
                 <div class="trust-badges">
                     <div class="trust-badge">
-                        <svg viewBox="0 0 24 24" fill="#28a745">
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="#28a745"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                         <div class="trust-badge-text">
                             <span class="trust-badge-label">Security</span>
                             <span class="trust-badge-value">SSL Encrypted</span>
                         </div>
                     </div>
                     <div class="trust-badge">
-                        <svg viewBox="0 0 24 24" fill="#007bff">
-                            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="#007bff"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
                         <div class="trust-badge-text">
                             <span class="trust-badge-label">Privacy</span>
                             <span class="trust-badge-value">GDPR Compliant</span>
                         </div>
                     </div>
                     <div class="trust-badge">
-                        <svg viewBox="0 0 24 24" fill="#fbbf24">
-                            <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="#fbbf24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
                         <div class="trust-badge-text">
                             <span class="trust-badge-label">Rating</span>
                             <span class="trust-badge-value">4.8/5 Stars</span>
                         </div>
                     </div>
                     <div class="trust-badge">
-                        <svg viewBox="0 0 24 24" fill="#007bff">
-                            <path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zM7 11h5v5H7z"/>
-                        </svg>
+                        <svg viewBox="0 0 24 24" fill="#007bff"><path d="M19 4h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11zM7 11h5v5H7z"/></svg>
                         <div class="trust-badge-text">
                             <span class="trust-badge-label">Established</span>
                             <span class="trust-badge-value">Since 2023</span>
@@ -521,10 +558,7 @@
                         <p class="testimonial-text">"Study ELITE transformed how I prepare for exams. The visual progress tracking keeps me motivated every single day."</p>
                         <div class="testimonial-header" style="margin-top:15px;">
                             <div class="testimonial-avatar"></div>
-                            <div class="testimonial-author">
-                                <h5>Maria G.</h5>
-                                <p>Engineering Student</p>
-                            </div>
+                            <div class="testimonial-author"><h5>Maria G.</h5><p>Engineering Student</p></div>
                         </div>
                     </div>
                     <div class="testimonial-card">
@@ -532,10 +566,7 @@
                         <p class="testimonial-text">"Finally, an app that understands student life. The streak system is addictive in the best way possible."</p>
                         <div class="testimonial-header" style="margin-top:15px;">
                             <div class="testimonial-avatar"></div>
-                            <div class="testimonial-author">
-                                <h5>James R.</h5>
-                                <p>Medical Student</p>
-                            </div>
+                            <div class="testimonial-author"><h5>James R.</h5><p>Medical Student</p></div>
                         </div>
                     </div>
                     <div class="testimonial-card">
@@ -543,10 +574,7 @@
                         <p class="testimonial-text">"I went from overwhelmed to organized in one week. My grades improved and stress went down. Highly recommend!"</p>
                         <div class="testimonial-header" style="margin-top:15px;">
                             <div class="testimonial-avatar"></div>
-                            <div class="testimonial-author">
-                                <h5>Sarah K.</h5>
-                                <p>High School Senior</p>
-                            </div>
+                            <div class="testimonial-author"><h5>Sarah K.</h5><p>High School Senior</p></div>
                         </div>
                     </div>
                 </div>
@@ -558,7 +586,6 @@
         <div class="container">
             <h2 class="section-title">Simple Pricing. <span class="accent-text">Elite Value</span>.</h2>
             <p class="section-subtitle">Start for free. Upgrade to Elite when you need total mastery.</p>
-            
             <div class="price-grid">
                 <div class="price-card">
                     <div class="price-header">
@@ -574,7 +601,6 @@
                     </ul>
                     <a href="#download" class="btn btn-secondary" style="width:100%">Get Started</a>
                 </div>
-                
                 <div class="price-card featured">
                     <span class="badge" style="position:absolute; top:20px; right:20px; margin:0;">Currently Free!</span>
                     <div class="price-header">
@@ -600,7 +626,6 @@
         <div class="container">
             <h2 class="section-title">Frequently Asked Questions</h2>
             <p class="section-subtitle">Have questions? We have answers.</p>
-            
             <div class="faq-grid">
                 <div class="faq-item">
                     <div class="faq-question">Is Study ELITE really free? <span class="faq-icon">▼</span></div>
@@ -636,7 +661,8 @@
             <div class="footer-links">
                 <a href="https://nexocodai-studyelite.hf.space/privacy.html">Privacy Policy</a>
                 <a href="https://nexocodai-studyelite.hf.space/privacy.html">Terms of Service</a>
-                <a href="/cdn-cgi/l/email-protection#c8aba7a6bca9abbc88bbbcbdacb1ada4a1bcade6a9b8b8">Contact</a>
+                <!-- FIX 3: Correct email address -->
+                <a href="mailto:paueliteesp@gmail.com">Contact</a>
             </div>
             <p class="copyright">&copy; 2026 Study ELITE. All rights reserved.</p>
             <p class="copyright" style="margin-top:5px; font-size:0.7rem;">Android Package ID: com.studyelite.app | Established 2023</p>
@@ -665,25 +691,43 @@
         </div>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Set dynamic package name in UI
+    <script>
+        // Set dynamic package name
         document.getElementById('apk-package-file').innerText = CONFIG.ANDROID_PACKAGE_NAME;
 
-        // FAQ Accordion Logic
+        // ===== FIX 1: Mobile menu functions =====
+        function toggleMobileMenu() {
+            const nav = document.getElementById('mobileNav');
+            const btn = document.querySelector('.mobile-menu-btn');
+            const isOpen = nav.classList.contains('open');
+            nav.classList.toggle('open');
+            btn.textContent = isOpen ? '☰' : '✕';
+        }
+
+        function closeMobileMenu() {
+            const nav = document.getElementById('mobileNav');
+            const btn = document.querySelector('.mobile-menu-btn');
+            nav.classList.remove('open');
+            btn.textContent = '☰';
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            const nav = document.getElementById('mobileNav');
+            const btn = document.querySelector('.mobile-menu-btn');
+            if (nav.classList.contains('open') && !nav.contains(e.target) && !btn.contains(e.target)) {
+                closeMobileMenu();
+            }
+        });
+
+        // FAQ Accordion
         const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            question.addEventListener('click', () => {
-                // Close other items
-                faqItems.forEach(otherItem => {
-                    if (otherItem !== item && otherItem.classList.contains('active')) {
-                        otherItem.classList.remove('active');
-                    }
-                });
-                // Toggle current item
+            item.querySelector('.faq-question').addEventListener('click', () => {
+                faqItems.forEach(other => { if (other !== item) other.classList.remove('active'); });
                 item.classList.toggle('active');
             });
         });
-
-        // Simple Mobile Menu (Placeholder behavior)
-        document.querySelector('.mobile
+    </script>
+</body>
+</html>
