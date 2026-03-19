@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study ELITE | Master Your Study, Conquer Your Goals</title>
+    <meta name="description" content="Turn study chaos into a clear, measurable daily plan. Organize subjects, track progress, and build unstoppable consistency.">
+    
+    <meta property="og:title" content="Study ELITE - The Ultimate Study Organization System">
+    <meta property="og:description" content="Organize subjects, track progress, and build study habits that stick.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            /* Colors */
+            --bg-dark: #0a0a0a;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --bg-glass: rgba(15, 15, 15, 0.7);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+            --accent: #007bff; /* Electric Blue */
+            --accent-glow: rgba(0, 123, 255, 0.3);
+            --success: #28a745;
+
+            /* Typography */
+            --font-main: 'Inter', sans-serif;
+
+            /* Spacing & Effects */
+            --container-width: 1100px;
+            --radius-lg: 16px;
+            --radius-md: 12px;
+            --glass-blur: blur(12px);
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; font-family: var(--font-main); color: var(--text-primary); background-color: var(--bg-dark); }
+        body { overflow-x: hidden; -webkit-font-smoothing: antialiased; line-height: 1.6; }
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        button { border: none; background: none; cursor: pointer; font-family: var(--font-main); transition: var(--transition); }
+
+        /* --- UTILITIES --- */
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 20px; width: 100%; }
+        .section-title { font-size: 2.5rem; font-weight: 800; text-align: center; margin-bottom: 1rem; letter-spacing: -1px; }
+        .section-subtitle { font-size: 1.125rem; color: var(--text-secondary); text-align: center; max-width: 600px; margin: 0 auto 4rem auto; }
+        .accent-text { color: var(--accent); }
+        .badge { display: inline-block; padding: 6px 12px; border-radius: 20px; background: rgba(0, 123, 255, 0.1); border: 1px solid rgba(0, 123, 255, 0.2); color: var(--accent); font-size: 0.8rem; font-weight: 600; margin-bottom: 1rem; }
+
+        /* --- BUTTONS --- */
+        .btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; border-radius: var(--radius-md); font-weight: 600; font-size: 1rem; transition: var(--transition); }
+        
+        .btn-primary { background-color: var(--accent); color: white; border: 1px solid transparent; }
+        .btn-primary:hover { background-color: #0069d9; transform: translateY(-2px); box-shadow: 0 4px 15px var(--accent-glow); }
+
+        .btn-secondary { background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-glass); }
+        .btn-secondary:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.15); }
+
+        .btn-web { color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; }
+        .btn-web:hover { color: var(--text-primary); }
+
+        /* --- HEADER --- */
+        header { position: fixed; top: 0; width: 100%; z-index: 1000; border-bottom: 1px solid var(--border-glass); background: var(--bg-glass); backdrop-filter: var(--glass-blur); -webkit-backdrop-filter: var(--glass-blur); }
+        nav { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+        .logo { font-size: 1.25rem; font-weight: 800; letter-spacing: -1px; display: flex; align-items: center; gap: 8px; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-size: 0.9rem; color: var(--text-secondary); font-weight: 500; }
+        .nav-links a:hover { color: var(--text-primary); }
+        
+        .mobile-menu-btn { display: none; color: white; font-size: 1.5rem; }
+
+        /* --- HERO --- */
+        .hero { padding: 160px 0 100px 0; text-align: center; position: relative; }
+        .hero::before { content: ''; position: absolute; width: 300px; height: 300px; background: var(--accent); filter: blur(150px); opacity: 0.2; top: 10%; left: 50%; transform: translateX(-50%); z-index: -1; }
+        
+        .hero h1 { font-size: 3.5rem; font-weight: 800; line-height: 1.1; letter-spacing: -2px; margin-bottom: 1.5rem; }
+        .hero p { font-size: 1.25rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 3rem auto; }
+        .hero-ctas { display: flex; gap: 15px; justify-content: center; align-items: center; margin-bottom: 1rem; }
+        
+        /* App Mockup Placeholder */
+        .mockup-container { margin-top: 60px; position: relative; display: flex; justify-content: center; }
+        .mockup-phone { width: 280px; height: 580px; background: #171717; border: 12px solid #262626; border-radius: 36px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); overflow: hidden; position: relative; }
+        .mockup-notch { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 120px; height: 25px; background: #262626; border-bottom-left-radius: 15px; border-bottom-right-radius: 15px; z-index: 10; }
+        .mockup-content { padding: 40px 20px; display: flex; flex-direction: column; gap: 15px; text-align: left; }
+        .mc-header { height: 20px; width: 60%; background: #333; border-radius: 4px; margin-bottom: 20px; }
+        .mc-card { background: #222; border-radius: var(--radius-md); padding: 15px; border: 1px solid #333; }
+        .mc-line { height: 10px; background: #333; border-radius: 2px; margin-bottom: 8px; }
+        .mc-line.short { width: 40%; }
+        .mc-bar-chart { display: flex; gap: 8px; align-items: flex-end; height: 60px; margin-top: 15px; }
+        .mc-bar { flex: 1; background: #333; border-radius: 2px; }
+        .mc-bar.active { background: var(--accent); height: 100%; }
+
+        /* --- PROBLEM/SOLUTION --- */
+        .prob-sol { padding: 100px 0; background: rgba(255,255,255,0.01); border-top: 1px solid var(--border-glass); border-bottom: 1px solid var(--border-glass); }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .prob-card { background: var(--bg-card); border: 1px solid var(--border-glass); padding: 30px; border-radius: var(--radius-lg); transition: var(--transition); }
+        .prob-card:hover { border-color: rgba(255,255,255,0.15); transform: translateY(-5px); }
+        .prob-icon { font-size: 1.5rem; color: var(--accent); margin-bottom: 20px; display: inline-flex; width: 50px; height: 50px; background: rgba(0,123,255,0.1); align-items: center; justify-content: center; border-radius: 12px; }
+        .prob-card h3 { font-size: 1.25rem; margin-bottom: 10px; font-weight: 700; }
+        .prob-card p { color: var(--text-secondary); font-size: 0.95rem; }
+
+        /* --- FEATURES --- */
+        .features { padding: 100px 0; }
+        .grid-6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .feat-card { background: var(--bg-card); border: 1px solid var(--border-glass); padding: 25px; border-radius: var(--radius-md); display: flex; flex-direction: column; gap: 10px; }
+        .feat-card h4 { font-size: 1.1rem; font-weight: 600; }
+        .feat-card p { color: var(--text-secondary); font-size: 0.9rem; }
+        
+        /* --- HOW IT WORKS --- */
+        .how { padding: 100px 0; background: rgba(255,255,255,0.01); border-top: 1px solid var(--border-glass); }
+        .step { text-align: center; position: relative; }
+        .step-num { font-size: 3rem; font-weight: 800; color: rgba(255,255,255,0.05); position: absolute; top: -20px; left: 50%; transform: translateX(-50%); z-index: -1; }
+        .step h3 { font-size: 1.25rem; margin-top: 20px; margin-bottom: 10px; }
+
+        /* --- DOWNLOAD SECTION (Crucial for Trust) --- */
+        .download { padding: 100px 0; position: relative; }
+        .download-wrapper { background: var(--bg-card); border: 1px solid var(--border-glass); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); padding: 60px; border-radius: 24px; position: relative; overflow: hidden; }
+        .download-wrapper::before { content: ''; position: absolute; width: 200px; height: 200px; background: var(--accent); filter: blur(100px); opacity: 0.15; bottom: -50px; right: -50px; }
+        
+        .dl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+        .dl-info h2 { font-size: 2.25rem; font-weight: 800; margin-bottom: 1rem; letter-spacing: -1px; }
+        .dl-info p { color: var(--text-secondary); margin-bottom: 2rem; }
+        
+        .dl-platforms { display: flex; flex-direction: column; gap: 20px; }
+        
+        /* Platform Card */
+        .dl-platform-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border-glass); padding: 20px; border-radius: var(--radius-md); transition: var(--transition); }
+        .dl-platform-card:hover { border-color: rgba(255,255,255,0.12); background: rgba(255,255,255,0.04); }
+        
+        .dl-plat-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+        .dl-plat-icon { width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 8px; background: rgba(255,255,255,0.05); font-size: 1.2rem; }
+        .dl-plat-title h4 { font-size: 1.1rem; font-weight: 600; }
+        .dl-plat-title p { font-size: 0.8rem; color: var(--success); font-weight: 500; }
+
+        /* Steps for APK */
+        .dl-steps { margin-top: 15px; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; gap: 10px; }
+        .dl-step-item { display: flex; align-items: start; gap: 10px; font-size: 0.85rem; color: var(--text-secondary); }
+        .dl-step-count { width: 18px; height: 18px; border-radius: 50%; background: rgba(255,255,255,0.1); color: var(--text-primary); display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-weight: 700; margin-top: 2px; flex-shrink: 0; }
+        
+        .dl-btn-group { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }
+
+        /* --- TRUST METRICS --- */
+        .metrics { padding: 60px 0; background: rgba(0,123,255,0.03); border-top: 1px solid rgba(0,123,255,0.1); border-bottom: 1px solid rgba(0,123,255,0.1); }
+        .metric-item { text-align: center; }
+        .metric-num { font-size: 2.5rem; font-weight: 800; color: var(--accent); letter-spacing: -1px; }
+        .metric-label { color: var(--text-secondary); font-size: 0.9rem; font-weight: 500; }
+
+        /* --- PRICING --- */
+        .pricing { padding: 100px 0; }
+        .price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 800px; margin: 0 auto; align-items: start; }
+        
+        .price-card { background: var(--bg-card); border: 1px solid var(--border-glass); padding: 40px; border-radius: var(--radius-lg); position: relative; }
+        .price-card.featured { border-color: var(--accent); box-shadow: 0 0 20px rgba(0,123,255,0.15); }
+        
+        .price-header h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 5px; }
+        .price-header p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 20px; }
+        .price-value { font-size: 3rem; font-weight: 800; letter-spacing: -2px; margin-bottom: 30px; }
+        .price-value span { font-size: 1rem; color: var(--text-secondary); font-weight: 400; letter-spacing: 0; }
+        
+        .price-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 30px; font-size: 0.95rem; }
+        .price-list li { display: flex; align-items: center; gap: 10px; color: var(--text-secondary); }
+        .price-list li::before { content: '✓'; color: var(--accent); font-weight: 700; }
+
+        /* --- FAQ --- */
+        .faq { padding: 100px 0; background: rgba(255,255,255,0.01); border-top: 1px solid var(--border-glass); }
+        .faq-grid { max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px; }
+        .faq-item { background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: var(--radius-md); overflow: hidden; }
+        .faq-question { padding: 20px 25px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1rem; }
+        .faq-answer { padding: 0 25px; max-height: 0; overflow: hidden; transition: all 0.3s ease-out; color: var(--text-secondary); font-size: 0.95rem; }
+        .faq-item.active .faq-answer { padding-bottom: 25px; max-height: 300px; }
+        .faq-icon { transition: transform 0.3s ease; font-size: 0.8rem; }
+        .faq-item.active .faq-icon { transform: rotate(180deg); }
+
+        /* --- FOOTER --- */
+        footer { padding: 60px 0; border-top: 1px solid var(--border-glass); background: #080808; text-align: center; }
+        .footer-logo { font-size: 1.1rem; font-weight: 800; margin-bottom: 20px; display: inline-block; }
+        .footer-links { display: flex; gap: 20px; justify-content: center; margin-bottom: 20px; font-size: 0.85rem; color: var(--text-secondary); }
+        .footer-links a:hover { color: var(--text-primary); }
+        .copyright { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 992px) {
+            .grid-3, .grid-6, .price-grid, .dl-grid { grid-template-columns: 1fr 1fr; }
+            .hero h1 { font-size: 2.8rem; }
+        }
+
+        @media (max-width: 768px) {
+            .section-title { font-size: 2rem; }
+            .hero { padding: 120px 0 60px 0; }
+            .hero h1 { font-size: 2.2rem; letter-spacing: -1px; }
+            .hero p { font-size: 1.1rem; }
+            .hero-ctas { flex-direction: column; width: 100%; max-width: 300px; margin-left: auto; margin-right: auto; }
+            
+            .nav-links { display: none; /* Simple mobile hide */ }
+            .mobile-menu-btn { display: block; }
+            
+            .grid-3, .grid-6, .price-grid, .dl-grid, .metric-grid { grid-template-columns: 1fr; }
+            .metric-grid { gap: 30px; }
+            
+            .download-wrapper { padding: 30px; }
+            .price-card { padding: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+        // Placeholders for your URLs
+        const CONFIG = {
+            ANDROID_APK_URL: "#TODO_LINK_TO_YOUR_APK_FILE.apk", // Eg: https://github.com/user/repo/releases/download/v1.0/app.apk
+            WINDOWS_IPHONE_URL: "https://nexocodai-studyelite.hf.space/",
+            WEB_APP_URL: "https://nexocodai-studyelite.hf.space/", // Usually the same as above if it's a PWA
+            ANDROID_PACKAGE_NAME: "com.studyelite.app"
+        };
+    </script>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <span style="color:var(--accent)">🎓</span> Study ELITE
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#how">How it works</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+                <a href="#download" class="btn btn-secondary btn-sm" style="padding: 8px 16px; font-size: 0.85rem;">Install App</a>
+                <button class="mobile-menu-btn">☰</button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <span class="badge">Built for High School & Uni Students</span>
+            <h1>Master Your Study.<br>Conquer Your <span class="accent-text">Goals</span>.</h1>
+            <p>Study ELITE turns chaotic studying into a structured, high-performance daily plan. Stay organized, maintain focus, and build unstoppable consistency.</p>
+            <div class="hero-ctas">
+                <a href="#download" class="btn btn-primary">Start Studying Smarter</a>
+                <a href="#features" class="btn btn-secondary">Explore Features ↓</a>
+            </div>
+            <a href="javascript:void(0)" onclick="window.location.href=CONFIG.WEB_APP_URL" class="btn btn-web">Or open in Web Browser →</a>
+
+            <div class="mockup-container">
+                <div class="mockup-phone">
+                    <div class="mockup-notch"></div>
+                    <div class="mockup-content">
+                        <div class="mc-header"></div>
+                        <div class="mc-card">
+                            <div class="mc-line"></div>
+                            <div class="mc-line short"></div>
+                        </div>
+                        <div class="mc-card">
+                            <div class="mc-line"></div>
+                            <div class="mc-bar-chart">
+                                <div class="mc-bar" style="height: 40%"></div>
+                                <div class="mc-bar" style="height: 60%"></div>
+                                <div class="mc-bar active"></div>
+                                <div class="mc-bar" style="height: 50%"></div>
+                                <div class="mc-bar" style="height: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="mc-card" style="margin-top:auto; background: var(--accent); border:none;">
+                            <div class="mc-line" style="background:rgba(255,255,255,0.5)"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="problem" class="prob-sol">
+        <div class="container">
+            <h2 class="section-title">Stop Stressing. Start <span class="accent-text">Achieving</span>.</h2>
+            <p class="section-subtitle">Ditch the overwhelming to-do lists and visual chaos. Rely on a trusted system designed for academic success.</p>
+            
+            <div class="grid-3">
+                <div class="prob-card">
+                    <div class="prob-icon">📅</div>
+                    <h3>Total Clarity</h3>
+                    <p>Wake up knowing exactly *what* to study and *when*. No more wasted time deciding where to start.</p>
+                </div>
+                <div class="prob-card">
+                    <div class="prob-icon">📊</div>
+                    <h3>Visible Progress</h3>
+                    <p>Track your study hours and completed topics. Seeing your advance is the best motivation to keep going.</p>
+                </div>
+                <div class="prob-card">
+                    <div class="prob-icon">🔥</div>
+                    <h3>Habit Building</h3>
+                    <p>Turn studying into a routine with streaks and rewards. Build the consistency needed for elite results.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Your Academic Command Center</h2>
+            <p class="section-subtitle">Everything you need to organize, optimize, and excel in your studies, right in your pocket.</p>
+            
+            <div class="grid-6">
+                <div class="feat-card"><h4>Dashboard</h4><p>Immediate view of today's priorities and upcoming tasks.</p></div>
+                <div class="feat-card"><h4>Subject Organizer</h4><p>Manage all your subjects, materials, and grades in one place.</p></div>
+                <div class="feat-card"><h4>Study Planner</h4><p>Schedule exam preparation and project deadlines effectively.</p></div>
+                <div class="feat-card"><h4>Task Management</h4><p>Break down heavy topics into manageable, actionable tasks.</p></div>
+                <div class="feat-card"><h4>Motivation System</h4><p>Earn coins, maintain streaks, and unlock rewards for consistency.</p></div>
+                <div class="feat-card"><h4>Cross-Platform</h4><p>Syncs seamlessly between Web, Android, Windows, and iOS.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="how" class="how">
+        <div class="container">
+            <h2 class="section-title">Three Steps to Elite Organization</h2>
+            
+            <div class="grid-3" style="margin-top: 60px;">
+                <div class="step">
+                    <div class="step-num">1</div>
+                    <div class="prob-icon">📝</div>
+                    <h3>Setup Subjects</h3>
+                    <p>Input your courses and define your academic goals for the term.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">2</div>
+                    <div class="prob-icon">⚡</div>
+                    <h3>Plan & Execute</h3>
+                    <p>Let the app generate your daily plan. Focus and tick off tasks.</p>
+                </div>
+                <div class="step">
+                    <div class="step-num">3</div>
+                    <div class="prob-icon">🏆</div>
+                    <h3>Review & Repeat</h3>
+                    <p>Analyze your progress, maintain your streak, and improve daily.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="download" class="download">
+        <div class="container">
+            <div class="download-wrapper">
+                <div class="dl-grid">
+                    <div class="dl-info">
+                        <h2>Get the App</h2>
+                        <p>Study ELITE is available across all your devices. For students using non-standard stores, we provide direct, secure access to our official builds.</p>
+                        <div style="display:flex; align-items:center; gap:10px; color: var(--success); font-weight:500; font-size:0.9rem; background:rgba(40,167,69,0.1); padding:10px; border-radius:8px; border:1px solid rgba(40,167,69,0.2);">
+                            <span>🛡️</span> Official & Secure Direct Downloads
+                        </div>
+                    </div>
+                    
+                    <div class="dl-platforms">
+                        <div class="dl-platform-card">
+                            <div class="dl-plat-header">
+                                <div class="dl-plat-icon">🤖</div>
+                                <div class="dl-plat-title">
+                                    <h4>Android (Direct APK)</h4>
+                                    <p>Verified Secure Build</p>
+                                </div>
+                            </div>
+                            <p style="font-size:0.85rem; color:var(--text-secondary);">Package: <code style="color:white; background:#222; padding:2px 4px; border-radius:4px;" id="apk-package-file">com.studyelite.app</code></p>
+                            
+                            <div class="dl-steps">
+                                <p style="font-weight:600; font-size:0.85rem; color:white;">Installation Steps:</p>
+                                <div class="dl-step-item"><div class="dl-step-count">1</div>Download the .apk file below.</div>
+                                <div class="dl-step-item"><div class="dl-step-count">2</div>Open the file. If prompted, allow "Install from Unknown Sources" in your browser/file manager settings.</div>
+                                <div class="dl-step-item"><div class="dl-step-count">3</div>Complete installation & launch Study ELITE.</div>
+                            </div>
+
+                            <div class="dl-btn-group">
+                                <a href="javascript:void(0)" onclick="window.location.href=CONFIG.ANDROID_APK_URL" class="btn btn-primary btn-sm">Download APK ⬇️</a>
+                            </div>
+                        </div>
+
+                        <div class="dl-platform-card">
+                            <div class="dl-plat-header">
+                                <div class="dl-plat-icon">💻 / 🍎</div>
+                                <div class="dl-plat-title">
+                                    <h4>Windows & iPhone (iOS)</h4>
+                                    <p>Web App / PWA Technology</p>
+                                </div>
+                            </div>
+                            <p style="font-size:0.85rem; color:var(--text-secondary);">Access the fully functional app directly through your browser. You can "Add to Home Screen" (iOS) or "Install" via Chrome/Edge (Windows) for a native experience.</p>
+                            <div class="dl-btn-group">
+                                <a href="javascript:void(0)" onclick="window.location.href=CONFIG.WINDOWS_IPHONE_URL" class="btn btn-secondary btn-sm">Open on Windows/iPhone</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="metrics">
+        <div class="container">
+            <div class="grid-3 metric-grid">
+                <div class="metric-item">
+                    <div class="metric-num">+10,000</div>
+                    <div class="metric-label">Study Sessions Organized</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-num">+2,500</div>
+                    <div class="metric-label">Active Students</div>
+                </div>
+                <div class="metric-item">
+                    <div class="metric-num">4.8/5</div>
+                    <div class="metric-label">User Satisfaction (Beta)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="section-title">Simple Pricing. <span class="accent-text">Elite Value</span>.</h2>
+            <p class="section-subtitle">Start for free. Upgrade to Elite when you need total mastery.</p>
+            
+            <div class="price-grid">
+                <div class="price-card">
+                    <div class="price-header">
+                        <h3>Free</h3>
+                        <p>Essentials for getting started.</p>
+                    </div>
+                    <div class="price-value">$0<span>/forever</span></div>
+                    <ul class="price-list">
+                        <li>Up to 3 Subjects</li>
+                        <li>Basic Task Management</li>
+                        <li>Streak Tracking</li>
+                        <li>Web Access</li>
+                    </ul>
+                    <a href="#download" class="btn btn-secondary" style="width:100%">Get Started</a>
+                </div>
+                
+                <div class="price-card featured">
+                    <span class="badge" style="position:absolute; top:20px; right:20px; margin:0;">Currently Free!</span>
+                    <div class="price-header">
+                        <h3>Elite</h3>
+                        <p>Unlimited power for top students.</p>
+                    </div>
+                    <div class="price-value">$0*<span>/month</span></div>
+                    <p style="font-size:0.8rem; color:var(--text-secondary); margin-top:-25px; margin-bottom:25px;">*Elite features are unlocked for all beta users.</p>
+                    <ul class="price-list">
+                        <li>Unlimited Subjects</li>
+                        <li>Advanced Subject Organizer</li>
+                        <li>Full Study Planner</li>
+                        <li>Priority Support</li>
+                        <li>All Platform Access</li>
+                    </ul>
+                    <a href="#download" class="btn btn-primary" style="width:100%">Unlock Elite Access</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <p class="section-subtitle">Have questions? We have answers.</p>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">Is Study ELITE really free? <span class="faq-icon">▼</span></div>
+                    <div class="faq-answer">Yes, the basic version is free forever. Currently, we are offering Elite features for free to all users during our beta phase.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Does it work without installation? <span class="faq-icon">▼</span></div>
+                    <div class="faq-answer">Yes! You can use the fully functional web version without downloading anything. Just click "Open in Web Browser".</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Are there Android/iPhone apps? <span class="faq-icon">▼</span></div>
+                    <div class="faq-answer">We provide a direct APK for Android. For iPhone, we use PWA technology—you can add the web app to your home screen for an app-like experience.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What happens if I change devices? <span class="faq-icon">▼</span></div>
+                    <div class="faq-answer">As long as you create an account, all your data syncs securely to the cloud and will be available on any device you log into.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do I need an account? <span class="faq-icon">▼</span></div>
+                    <div class="faq-answer">You can try the app without an account, but we highly recommend creating one to sync your data and ensure you don't lose progress.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How is my data protected? <span class="faq-icon">▼</span></div>
+                    <div class="faq-answer">We prioritize user privacy. Your data is encrypted in transit and at rest. We do not sell student data to third parties.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <a href="#" class="footer-logo">🎓 Study ELITE</a>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="mailto:contact@studyelite.app">Contact</a>
+            </div>
+            <p class="copyright">&copy; 2023 Study ELITE. All rights reserved.</p>
+            <p class="copyright" style="margin-top:5px; font-size:0.7rem;">Package ID: com.studyelite.app</p>
+        </div>
+    </footer>
+
+    <script>
+        // Set dynamic package name in UI
+        document.getElementById('apk-package-file').innerText = CONFIG.ANDROID_PACKAGE_NAME;
+
+        // FAQ Accordion Logic
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                // Close other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+
+        // Simple Mobile Menu (Placeholder behavior)
+        document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
+            alert('Navigation menu would open here on mobile.');
+        });
+    </script>
+</body>
+</html>
