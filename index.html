@@ -237,11 +237,12 @@
     <script>
         // Configuration URLs
         const CONFIG = {
-            ANDROID_APK_URL: "https://raw.githubusercontent.com/studyelite/studyelite/main/releases/app-release.apk",
-            WINDOWS_IPHONE_URL: "https://nexocodai-studyelite.hf.space/",
-            WEB_APP_URL: "https://nexocodai-studyelite.hf.space/",
-            ANDROID_PACKAGE_NAME: "com.studyelite.app"
-        };
+    // Esta URL es la correcta para descargas directas en GitHub
+    ANDROID_APK_URL: "https://github.com/studyelite/studyelite/raw/main/releases/app-release.apk",
+    WINDOWS_IPHONE_URL: "https://nexocodai-studyelite.hf.space/",
+    WEB_APP_URL: "https://nexocodai-studyelite.hf.space/",
+    ANDROID_PACKAGE_NAME: "com.studyelite.app"
+};
     </script>
 
     <header>
@@ -255,7 +256,8 @@
                     <li><a href="#how">How it works</a></li>
                     <li><a href="#faq">FAQ</a></li>
                 </ul>
-                <a href="#download" class="btn btn-secondary btn-sm" style="padding: 8px 16px; font-size: 0.85rem;">Install App</a>
+                <a href="#download" class="btn btn-secondary btn-sm" ...>Install App</a>
+                <a href="#download" onclick="if(navigator.userAgent.toLowerCase().includes('android')) window.location.href=CONFIG.ANDROID_APK_URL" class="btn btn-secondary btn-sm" style="padding: 8px 16px; font-size: 0.85rem;">Install App</a>
                 <button class="mobile-menu-btn">☰</button>
             </nav>
         </div>
