@@ -265,7 +265,7 @@
         // Configuration URLs
         const CONFIG = {
             // FIX 2: Use the correct GitHub raw APK URL that triggers download
-            ANDROID_APK_URL: "https://github.com/studyelite/studyelite/releases/download/v1.0/app-release.apk",
+            ANDROID_APK_URL: "https://github.com/studyelite/studyelite/raw/main/releases/app-release.apk",
             WINDOWS_IPHONE_URL: "https://nexocodai-studyelite.hf.space/",
             WEB_APP_URL: "https://nexocodai-studyelite.hf.space/",
             ANDROID_PACKAGE_NAME: "com.studyelite.app"
@@ -645,7 +645,7 @@
                 <a href="https://nexocodai-studyelite.hf.space/privacy.html">Privacy Policy</a>
                 <a href="https://nexocodai-studyelite.hf.space/privacy.html">Terms of Service</a>
                 <!-- FIX 3: Correct email address -->
-                <a href="mailto:paueliteesp@gmail.com">Contact</a>
+                <a href="/cdn-cgi/l/email-protection#42322337272e2b362727313202252f232b2e6c212d2f">Contact</a>
             </div>
             <p class="copyright">&copy; 2026 Study ELITE. All rights reserved.</p>
             <p class="copyright" style="margin-top:5px; font-size:0.7rem;">Android Package ID: com.studyelite.app | Established 2023</p>
@@ -674,7 +674,7 @@
         </div>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Set dynamic package name
         document.getElementById('apk-package-file').innerText = CONFIG.ANDROID_PACKAGE_NAME;
 
@@ -707,10 +707,4 @@
         const faqItems = document.querySelectorAll('.faq-item');
         faqItems.forEach(item => {
             item.querySelector('.faq-question').addEventListener('click', () => {
-                faqItems.forEach(other => { if (other !== item) other.classList.remove('active'); });
-                item.classList.toggle('active');
-            });
-        });
-    </script>
-</body>
-</html>
+                faqItems.forEach(other => { if (other !==
